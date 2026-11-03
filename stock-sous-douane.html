@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="fr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Stock sous douane Pratab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: vertical flowchart on a dotted canvas, a tool legend above, a document shelf below */
+:root {
+  --bg: #ffffff; --soft: #f5f7fb; --surface: #ffffff; --fg: #18202c; --muted: #5a6577; --line: #d7dde8;
+  --accent: #1f5fd1; --accent-soft: #e6eefc; --claude: #c2571a; --claude-soft: #fbeee5;
+  --final: #1c7c43; --final-soft: #e5f4ea; --todo: #a35a00; --todo-soft: #fff3e0;
+  color-scheme: light;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15.5px; line-height: 1.55; }
+body:not([data-lang="en"]) .en, body[data-lang="en"] .fr { display: none; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 0 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.25; text-wrap: balance; margin: 0; }
+/* Header: translucent bar with process tabs, then a quiet title block */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 21; background: var(--bg); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255, 255, 255, .78);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); transition: box-shadow .25s ease; }
+.bar.scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 18px -14px rgba(16, 24, 40, .35); }
+.bar-in { max-width: 980px; margin: 0 auto; padding-block: 10px; display: flex; align-items: center; gap: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: -0.005em; white-space: nowrap; }
+.brand .dim { color: var(--muted); font-weight: 500; }
+.tabs { display: flex; gap: 2px; padding: 3px; background: var(--soft); border-radius: 10px; margin-inline: auto; min-width: 0; }
+.tabs a, .tabs .cur { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500;
+  color: var(--muted); text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
+.tabs a:hover { color: var(--fg); }
+.tabs a:active { transform: scale(.97); }
+.tabs .cur { background: var(--surface); color: var(--fg); font-weight: 600; box-shadow: 0 1px 2px rgba(16, 24, 40, .1), 0 0 0 .5px rgba(16, 24, 40, .08); }
+.tabs .tn { font-variant-numeric: tabular-nums; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700;
+  background: var(--line); color: var(--muted); }
+.tabs .cur .tn { background: var(--accent); color: #ffffff; }
+.tools { display: flex; align-items: center; gap: 4px; }
+.seg { display: inline-flex; padding: 2px; background: var(--soft); border-radius: 8px; }
+.seg button { font: inherit; font-size: 12.5px; font-weight: 600; border: 0; background: none; color: var(--muted); padding: 4px 9px; border-radius: 6px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgba(16, 24, 40, .12); }
+.icon-btn { font: inherit; font-size: 13.5px; font-weight: 500; border: 0; background: none; color: var(--accent); padding: 6px 10px; border-radius: 8px;
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: background .15s; }
+.icon-btn:hover { background: var(--soft); }
+.icon-btn:active, .seg button:active { transform: scale(.97); transition: transform .1s ease-out; }
+.icon-btn svg { width: 14px; height: 14px; }
+.icon-btn[aria-pressed="true"] { color: var(--claude); background: var(--claude-soft); }
+button:focus-visible, .node:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hero { padding-top: 44px; }
+.kicker { margin: 0; font-size: 13.5px; font-weight: 500; color: var(--muted); }
+h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.08; letter-spacing: -0.022em; font-weight: 700; margin-top: 10px; max-width: 20ch; }
+.lede { color: var(--muted); margin: 14px 0 0; max-width: 60ch; font-size: 17px; line-height: 1.5; }
+.facts { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 28px 0 0; }
+.facts div { min-width: 0; }
+.facts dt { font-size: 12.5px; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-family: var(--display); font-size: 28px; font-weight: 600; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tools-used { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
+.tools-used .tu-label { font-weight: 600; color: var(--fg); }
+.tool { display: inline-flex; align-items: center; gap: 7px; }
+.tool svg { width: 20px; height: 20px; display: block; }
+@media (max-width: 760px) {
+  .bar-in { flex-wrap: wrap; row-gap: 8px; }
+  .tabs { order: 3; width: 100%; margin-inline: 0; }
+  .tabs a, .tabs .cur { flex: 1; justify-content: center; padding-inline: 8px; }
+  .tools { margin-left: auto; }
+}
+@media (max-width: 520px) { .icon-btn .lbl { display: none; } .tabs a, .tabs .cur { font-size: 12.5px; } }
+@media (prefers-reduced-transparency: reduce) { .bar { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
+/* Flow */
+.flow { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+.pill { font-family: var(--display); font-weight: 600; font-size: 14px; padding: 8px 22px; border-radius: 999px; }
+.pill.start { background: var(--accent); color: #ffffff; }
+.pill.end { background: var(--final-soft); color: var(--final); border: 1.5px solid var(--final); }
+.arrow { display: flex; flex-direction: column; align-items: center; color: var(--line); height: 46px; }
+.arrow .shaft { width: 3px; flex: 1; border-radius: 3px;
+  background: repeating-linear-gradient(to bottom, var(--accent) 0 6px, transparent 6px 12px); background-size: 3px 12px;
+  animation: flow 0.9s linear infinite; opacity: .35; }
+.arrow svg { width: 16px; height: 10px; color: var(--accent); opacity: .5; }
+.arrow.lit .shaft { opacity: 1; } .arrow.lit svg { opacity: 1; }
+@keyframes flow { from { background-position: 0 0; } to { background-position: 0 12px; } }
+.node { position: relative; width: min(680px, 100%); background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.node.is-check { border-style: dashed; }
+.node.active { border-color: var(--accent); transform: translateY(-2px) scale(1.012); box-shadow: 0 10px 28px -12px var(--accent); }
+.nhead { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.num { font-family: var(--display); font-weight: 700; font-size: 13px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); flex: none; }
+.node.active .num { background: var(--accent); color: #ffffff; }
+.icons { display: flex; gap: 6px; }
+.ico svg { width: 34px; height: 34px; display: block; }
+.actor { font-size: 12.5px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.a-colleague { background: var(--todo-soft); color: var(--todo); }
+.a-partner { background: var(--final-soft); color: var(--final); }
+.a-system, .a-external { background: var(--soft); color: var(--muted); border: 1px solid var(--line); }
+.claude { display: none; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--claude); background: var(--claude-soft); padding: 3px 10px; border-radius: 999px; }
+.claude svg { width: 13px; height: 13px; }
+.node h3 { font-size: 17.5px; margin: 12px 0 4px; }
+.desc { margin: 0; color: var(--fg); max-width: 64ch; }
+.ex { margin: 8px 0 0; font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; }
+.todo { margin: 8px 0 0; font-size: 13.5px; color: var(--todo); background: var(--todo-soft); padding: 6px 10px; border-radius: 8px; }
+.docs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.doc { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; text-decoration: none; color: var(--fg); background: var(--soft);
+  border: 1px solid var(--line); border-radius: 10px; padding: 5px 10px 5px 6px; font-size: 13.5px; font-weight: 500; transition: border-color .2s, transform .2s; }
+.doc:hover { border-color: var(--accent); transform: translateY(-1px); }
+.doc .dicon svg { width: 22px; height: 22px; display: block; }
+.doc .dname { overflow-wrap: anywhere; }
+.doc > svg { width: 12px; height: 12px; color: var(--muted); flex: none; }
+.doc.final { border-color: var(--final); background: var(--final-soft); }
+.flag { font-size: 11px; font-weight: 700; color: var(--final); text-transform: uppercase; letter-spacing: .06em; }
+.split { width: min(520px, 80%); height: 3px; position: relative; }
+.split span { position: absolute; inset: 0; border-top: 3px dashed var(--accent); opacity: .45; }
+.branches { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: min(900px, 100%); }
+.branch { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.branch .node { width: 100%; }
+.side { margin-top: 26px; width: min(680px, 100%); }
+.note { width: min(680px, 100%); margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 14.5px; }
+.note b { font-family: var(--display); }
+.qlist { margin: 10px 0 0; padding-left: 20px; } .qlist li { margin: 6px 0; }
+.qbtn { margin-left: auto; font: inherit; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; border: 1px solid #f2c48d;
+  background: var(--todo-soft); color: var(--todo); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
+.qbtn svg { width: 14px; height: 14px; }
+.qbtn:hover { border-color: var(--todo); }
+.qbtn:active { transform: scale(.97); }
+.qbtn[aria-expanded="true"] { background: var(--todo); color: #ffffff; border-color: var(--todo); }
+.qbox { margin-top: 12px; background: var(--todo-soft); border: 1px solid #f2c48d; border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.qbox b { color: var(--todo); font-size: 12.5px; }
+.qbox ul { margin: 4px 0 0; padding-left: 18px; } .qbox li { margin: 5px 0; }
+@media (max-width: 720px) { .branches { grid-template-columns: 1fr; } .split { display: none; } }
+
+/* Shelf */
+h2 { font-size: 20px; margin: 48px 0 6px; }
+.shelf-intro { color: var(--muted); margin: 0 0 14px; font-size: 14.5px; }
+.shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.card { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: var(--fg); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 14px; transition: border-color .2s, transform .2s; min-width: 0; }
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card svg { width: 34px; height: 34px; flex: none; }
+.card div { min-width: 0; }
+.card b { display: block; font-size: 14px; overflow-wrap: anywhere; }
+.card span.sub { font-size: 13px; color: var(--muted); }
+.card.final { border-color: var(--final); background: var(--final-soft); }
+footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .arrow .shaft { animation: none; } .node, .doc, .card { transition: none; } .node.active { transform: none; } }
+
+/* "With Claude" view: same page, the flow is swapped and the accent turns orange */
+[data-view][hidden] { display: none !important; }
+body.mode-claude { --accent: #c2571a; --accent-soft: #fbeee5; }
+.mode-switch { display: inline-flex; flex-wrap: wrap; max-width: 100%; padding: 3px; background: var(--soft); border-radius: 10px; margin-bottom: 18px; }
+.mode-switch button { font: inherit; font-size: 14px; font-weight: 600; border: 0; background: none; color: var(--muted); padding: 7px 16px; border-radius: 8px;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.mode-switch button svg { width: 14px; height: 14px; }
+.mode-switch button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgba(16, 24, 40, .12), 0 0 0 .5px rgba(16, 24, 40, .08); }
+.mode-switch button[data-mode="claude"][aria-pressed="true"], .mode-switch button[data-mode="build"][aria-pressed="true"] { color: var(--claude); }
+.mode-switch button:active { transform: scale(.97); }
+.flowview[data-view="claude"] .node { width: min(760px, 100%); }
+.a-claude { background: var(--claude); color: #ffffff; }
+.uses { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.use { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--claude-soft); color: var(--claude); }
+.manual-tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+.node.is-manual { background: var(--soft); }
+.replaces { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
+.how { margin: 10px 0 0; padding-left: 20px; font-size: 14.5px; }
+.how li { margin: 3px 0; }
+.prompt { margin-top: 12px; border: 1px solid #f0cdb5; background: #fffaf6; border-radius: 10px; overflow: hidden; }
+.prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 6px 5px 12px; border-bottom: 1px solid #f0cdb5;
+  font-size: 12px; font-weight: 700; color: var(--claude); letter-spacing: .02em; }
+.copy { font: inherit; font-size: 12.5px; font-weight: 600; border: 1px solid #f0cdb5; background: #ffffff; color: var(--claude); border-radius: 7px; padding: 3px 10px; cursor: pointer; }
+.copy:hover { background: var(--claude-soft); }
+.copy:active { transform: scale(.97); }
+.pwhy { margin: 0; padding: 9px 12px; font-size: 14px; line-height: 1.5; color: var(--fg); border-bottom: 1px dashed #f0cdb5; background: #ffffff; }
+.prompt pre { margin: 0; padding: 10px 12px; font-family: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; font-size: 13px; line-height: 1.55;
+  white-space: pre-wrap; overflow-wrap: anywhere; color: var(--fg); }
+.result { margin: 10px 0 0; font-size: 14px; color: var(--final); background: var(--final-soft); padding: 6px 10px; border-radius: 8px; }
+.options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.opt { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; min-width: 0; background: var(--surface); }
+.opt b { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 4px; }
+.opt b svg { width: 24px; height: 24px; flex: none; }
+.opt code { display: block; margin-top: 8px; font-family: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace; font-size: 12.5px; background: #fffaf6;
+  border: 1px dashed #f0cdb5; padding: 6px 8px; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 720px) { .options { grid-template-columns: 1fr; } }
+</style>
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <span class="brand">Oxenham <span class="dim">· <span class="fr">Douane</span><span class="en">Customs</span></span></span>
+    <nav class="tabs" aria-label="Processus"><a href="index.html" data-local="index.html"><span class="tn">1</span><span class="fr">Déclaration d'import</span><span class="en">Import declaration</span></a><span class="cur" aria-current="page"><span class="tn">2</span><span class="fr">Stock sous douane</span><span class="en">Bonded stock</span></span><a href="cout-de-revient.html" data-local="cout-de-revient.html"><span class="tn">3</span><span class="fr">Coût de revient</span><span class="en">Costing</span></a></nav>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang-btn="fr" aria-pressed="true">FR</button><button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <section class="hero">
+    <div class="mode-switch" role="group" aria-label="Aujourd'hui ou avec Claude / Today or with Claude"><button type="button" data-mode="today" aria-pressed="true"><span class="fr">Aujourd&#39;hui</span><span class="en">Today</span></button><button type="button" data-mode="build" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2 6.5 6.5 2-6.5 2-2 6.5-2-6.5-6.5-2 6.5-2z" fill="currentColor"/></svg><span class="fr">Comment créer les skills</span><span class="en">How to build the skills</span></button><button type="button" data-mode="claude" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2 6.5 6.5 2-6.5 2-2 6.5-2-6.5-6.5-2 6.5-2z" fill="currentColor"/></svg><span class="fr">Comment utiliser les skills</span><span class="en">How to use the skills</span></button></div><div data-view="today"><p class="kicker"><span class="fr">Processus 2 sur 3 · Ce que Pratab fait aujourd'hui</span><span class="en">Process 2 of 3 · What Pratab does today</span></p>
+    <h1><span class="fr">Suivre le stock sous douane et le réconcilier avec Pastel</span><span class="en">Tracking bonded stock and reconciling it with Pastel</span></h1>
+    <p class="lede"><span class="fr">Ce que Pratab fait aujourd'hui pour savoir ce qui est sorti de l'entrepôt et quels droits payer. Survolez une étape pour la mettre en avant.</span><span class="en">What Pratab does today to know what left the warehouse and which duty to pay. Hover a step to highlight it.</span></p>
+    <dl class="facts"><div><dt><span class="fr">Étapes</span><span class="en">Steps</span></dt><dd>8</dd></div><div><dt><span class="fr">Intervenants</span><span class="en">People involved</span></dt><dd>3</dd></div><div><dt><span class="fr">Documents</span><span class="en">Documents</span></dt><dd>0</dd></div></dl>
+    <div class="tools-used"><span class="tu-label"><span class="fr">Outils</span><span class="en">Tools</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#8A5A2B"/><path d="M6 17l14-8 14 8v15H6z" fill="#F3E3CC"/><rect x="13" y="20" width="14" height="12" fill="#8A5A2B"/><path d="M13 24h14M13 28h14" stroke="#F3E3CC" stroke-width="1.4"/></svg><span class="fr">Entrepôt sous douane</span><span class="en">Bonded warehouse</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg>Excel</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#0F6CBD"/><rect x="17" y="12" width="17" height="16" rx="2" fill="#5EB3F0"/><path d="M17 13l8.5 7 8.5-7" fill="none" stroke="#ffffff" stroke-width="1.6"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0A4F8F"/><ellipse cx="14" cy="20" rx="4.6" ry="5.6" fill="none" stroke="#ffffff" stroke-width="2.4"/></svg>Outlook</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg>Pastel</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#3B4A63"/><rect x="5" y="11" width="14" height="11" rx="1.5" fill="#33C481"/><rect x="21" y="11" width="14" height="11" rx="1.5" fill="#7FD3A5"/><path d="M12 22v4M28 22v4M8 27h8M24 27h8" stroke="#ffffff" stroke-width="1.6"/><path d="M17 16.5h6" stroke="#ffffff" stroke-width="1.6" stroke-dasharray="2 1.5"/></svg><span class="fr">Deux écrans</span><span class="en">Two screens</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#1D2B57"/><path d="M20 7l11 4v8c0 7-5 11.5-11 14-6-2.5-11-7-11-14v-8z" fill="#C9A227"/><text x="20" y="23.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#1D2B57">MRA</text></svg><span class="fr">Site MRA</span><span class="en">MRA system</span></span></div></div><div data-view="claude" hidden><p class="kicker"><span class="fr">Processus 2 sur 3 · Le même travail avec Claude</span><span class="en">Process 2 of 3 · The same work with Claude</span></p>
+    <h1><span class="fr">Rapprocher le stock avec Claude</span><span class="en">Reconciling the stock with Claude</span></h1>
+    <p class="lede"><span class="fr">En bref : Pratab met le fichier CMS et l'export Pastel dans un dossier et écrit une phrase ; Claude ajoute au CMS les bouteilles restantes, le produit Pastel correspondant et la différence. Pratab vérifie les couleurs, choisit la déclaration et déclare.</span><span class="en">In short: Pratab puts the CMS file and the Pastel export in a folder and writes one sentence; Claude adds bottles left, the matching Pastel product and the difference to the CMS. Pratab checks the colours, chooses the declaration and declares.</span></p>
+    <dl class="facts"><div><dt><span class="fr">Étapes</span><span class="en">Steps</span></dt><dd>6</dd></div><div><dt><span class="fr">Prompts</span><span class="en">Prompts</span></dt><dd>2</dd></div><div><dt><span class="fr">Restent manuelles</span><span class="en">Still manual</span></dt><dd>3</dd></div></dl>
+    <div class="tools-used"><span class="tu-label"><span class="fr">Outils</span><span class="en">Tools</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg>Claude Cowork</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#8A5A2B"/><path d="M6 17l14-8 14 8v15H6z" fill="#F3E3CC"/><rect x="13" y="20" width="14" height="12" fill="#8A5A2B"/><path d="M13 24h14M13 28h14" stroke="#F3E3CC" stroke-width="1.4"/></svg>CMS</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg>Pastel</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg>Excel</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#1D2B57"/><path d="M20 7l11 4v8c0 7-5 11.5-11 14-6-2.5-11-7-11-14v-8z" fill="#C9A227"/><text x="20" y="23.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#1D2B57">MRA</text></svg><span class="fr">Site MRA</span><span class="en">MRA system</span></span></div></div><div data-view="build" hidden><p class="kicker"><span class="fr">Processus 2 sur 3 · Comment les skills ont été créés</span><span class="en">Process 2 of 3 · How the skills were built</span></p>
+    <h1><span class="fr">Créer le skill du stock sous douane</span><span class="en">Building the bonded stock skill</span></h1>
+    <p class="lede"><span class="fr">La même méthode pour chaque skill : on fait faire le travail une fois sur un vrai dossier, on corrige avec ses mots, puis on demande à Claude d'en faire un skill.</span><span class="en">The same method for every skill: have Claude do the work once on a real file, correct it in your own words, then ask Claude to turn it into a skill.</span></p>
+    <dl class="facts"><div><dt><span class="fr">Étapes</span><span class="en">Steps</span></dt><dd>5</dd></div><div><dt><span class="fr">Prompts</span><span class="en">Prompts</span></dt><dd>6</dd></div><div><dt><span class="fr">Skills créés</span><span class="en">Skills created</span></dt><dd>1</dd></div></dl>
+    <div class="tools-used"><span class="tu-label"><span class="fr">Outils</span><span class="en">Tools</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#2F6FD6"/><path d="M7 13a2 2 0 0 1 2-2h7l3 3h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#FFD66B"/><path d="M14 22l4 4 8-8" fill="none" stroke="#2F6FD6" stroke-width="2.4" stroke-linecap="round"/></svg><span class="fr">Dossier</span><span class="en">Folder</span></span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg>Claude Cowork</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#6B4FBB"/><circle cx="18" cy="18" r="8" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M24 24l7 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M14.5 18l2.5 2.5 4.5-5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>Skills</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg>Excel</span><span class="tool"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg>Pastel</span></div></div>
+  </section>
+  <div class="flowview" data-view="today"><div class="flow"><div class="pill start"><span class="fr">Départ</span><span class="en">Start</span></div>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="1" tabindex="0">
+  <div class="nhead"><span class="num">1</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#8A5A2B"/><path d="M6 17l14-8 14 8v15H6z" fill="#F3E3CC"/><rect x="13" y="20" width="14" height="12" fill="#8A5A2B"/><path d="M13 24h14M13 28h14" stroke="#F3E3CC" stroke-width="1.4"/></svg></span></div><span class="actor a-external"><span class="fr">Douane (MRA)</span><span class="en">Customs (MRA)</span></span></div>
+  <h3><span class="fr">Le vin entre en entrepôt sous douane</span><span class="en">Goods enter the bonded warehouse</span></h3><p class="desc"><span class="fr">Chaque conteneur déclaré entre en entrepôt sans payer de droits. Les droits sont payés seulement quand le vin sort pour être vendu.</span><span class="en">Each declared container enters the warehouse without paying duty. Duty is paid only when the wine leaves to be sold.</span></p><p class="ex"><span class="fr">Lien avec le processus 1 : la déclaration validée.</span><span class="en">Link with process 1: the cleared declaration.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="2" tabindex="0">
+  <div class="nhead"><span class="num">2</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Tenir le stock sous douane</span><span class="en">Keep the bonded stock list</span></h3><p class="desc"><span class="fr">Une ligne par déclaration : numéro de BOE, date, produit, cartons, date d'expiration. Le même vin apparaît sur plusieurs lignes s'il est arrivé dans plusieurs conteneurs.</span><span class="en">One line per declaration: BOE number, date, product, cartons, expiry date. The same wine appears on several lines if it came in several containers.</span></p><p class="ex"><span class="fr">Environ 500 lignes.</span><span class="en">About 500 lines.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="3" tabindex="0">
+  <div class="nhead"><span class="num">3</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#0F6CBD"/><rect x="17" y="12" width="17" height="16" rx="2" fill="#5EB3F0"/><path d="M17 13l8.5 7 8.5-7" fill="none" stroke="#ffffff" stroke-width="1.6"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0A4F8F"/><ellipse cx="14" cy="20" rx="4.6" ry="5.6" fill="none" stroke="#ffffff" stroke-width="2.4"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg></span></div><span class="actor a-partner">Sylvain (Pastel)</span></div>
+  <h3><span class="fr">Recevoir le stock Pastel</span><span class="en">Receive the Pastel stock</span></h3><p class="desc"><span class="fr">Sylvain envoie l'export du stock commercial (Pastel). Les ventes y sont déjà déduites : c'est le stock de référence.</span><span class="en">Sylvain sends the commercial stock export (Pastel). Sales are already deducted: it is the reference stock.</span></p><p class="ex"><span class="fr">Pratab : « C'est Sylvain qui a raison. »</span><span class="en">Pratab: "Sylvain is right."</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="4" tabindex="0">
+  <div class="nhead"><span class="num">4</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#3B4A63"/><rect x="5" y="11" width="14" height="11" rx="1.5" fill="#33C481"/><rect x="21" y="11" width="14" height="11" rx="1.5" fill="#7FD3A5"/><path d="M12 22v4M28 22v4M8 27h8M24 27h8" stroke="#ffffff" stroke-width="1.6"/><path d="M17 16.5h6" stroke="#ffffff" stroke-width="1.6" stroke-dasharray="2 1.5"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Retrouver chaque produit dans les deux fichiers</span><span class="en">Match each product across both files</span></h3><p class="desc"><span class="fr">Pratab ouvre les deux fichiers sur deux écrans et cherche chaque produit par sa description, car les noms ne sont pas identiques.</span><span class="en">Pratab opens both files on two screens and finds each product by its description, because the names differ.</span></p><p class="ex"><span class="fr">Exemple : AFRICAN SECRET MARULA CREAM.</span><span class="en">Example: AFRICAN SECRET MARULA CREAM.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="5" tabindex="0">
+  <div class="nhead"><span class="num">5</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#0E7C86"/><rect x="10" y="7" width="20" height="26" rx="3" fill="#ffffff"/><rect x="13" y="10" width="14" height="6" rx="1" fill="#0E7C86"/><g fill="#0E7C86"><circle cx="15" cy="21" r="1.6"/><circle cx="20" cy="21" r="1.6"/><circle cx="25" cy="21" r="1.6"/><circle cx="15" cy="27" r="1.6"/><circle cx="20" cy="27" r="1.6"/><circle cx="25" cy="27" r="1.6"/></g></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Additionner les lignes du même produit</span><span class="en">Add up lines for the same product</span></h3><p class="desc"><span class="fr">Pastel n'a qu'une ligne par produit, l'entrepôt en a une par déclaration. Pratab additionne les lignes de l'entrepôt avant de comparer.</span><span class="en">Pastel has one line per product, the warehouse has one per declaration. Pratab adds up the warehouse lines before comparing.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="6" tabindex="0">
+  <div class="nhead"><span class="num">6</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#0E7C86"/><rect x="10" y="7" width="20" height="26" rx="3" fill="#ffffff"/><rect x="13" y="10" width="14" height="6" rx="1" fill="#0E7C86"/><g fill="#0E7C86"><circle cx="15" cy="21" r="1.6"/><circle cx="20" cy="21" r="1.6"/><circle cx="25" cy="21" r="1.6"/><circle cx="15" cy="27" r="1.6"/><circle cx="20" cy="27" r="1.6"/><circle cx="25" cy="27" r="1.6"/></g></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Calculer la différence</span><span class="en">Calculate the difference</span></h3><p class="desc"><span class="fr">Stock en entrepôt moins stock Pastel : c'est la quantité vendue, à sortir de l'entrepôt et sur laquelle payer les droits.</span><span class="en">Warehouse stock minus Pastel stock: the quantity sold, to withdraw from the warehouse and pay duty on.</span></p><p class="ex"><span class="fr">Exemple de l'entretien : l'entrepôt a 220, Pastel 150, donc 70 à sortir.</span><span class="en">Example from the interview: warehouse 220, Pastel 150, so 70 to withdraw.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node is-check" data-step="7" tabindex="0">
+  <div class="nhead"><span class="num">7</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#6B4FBB"/><circle cx="18" cy="18" r="8" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M24 24l7 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M14.5 18l2.5 2.5 4.5-5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Choisir la déclaration d'où sortir</span><span class="en">Choose the declaration to withdraw from</span></h3><p class="desc"><span class="fr">La douane peut compter physiquement par déclaration. Pratab décide de quelle ligne sortir la quantité, en regardant la date d'entrée.</span><span class="en">Customs can count physically per declaration. Pratab decides which line to take the quantity from, based on the entry date.</span></p><p class="todo"><span class="fr">Règle exacte à confirmer avec Pratab.</span><span class="en">Exact rule to confirm with Pratab.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="8" tabindex="0">
+  <div class="nhead"><span class="num">8</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#1D2B57"/><path d="M20 7l11 4v8c0 7-5 11.5-11 14-6-2.5-11-7-11-14v-8z" fill="#C9A227"/><text x="20" y="23.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#1D2B57">MRA</text></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Déclarer la sortie et payer les droits</span><span class="en">Declare the withdrawal and pay duty</span></h3><p class="desc"><span class="fr">Il déclare la sortie à la douane et paie les droits. Chaque sortie est notée par date dans l'Excel de l'import (onglet Sheet2 ou TRANSFER).</span><span class="en">He declares the withdrawal to customs and pays the duty. Each withdrawal is logged by date in the import Excel (Sheet2 or TRANSFER tab).</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="pill end"><span class="fr">Stock à jour, droits payés</span><span class="en">Stock up to date, duty paid</span></div><div class="note"><b><span class="fr">En continu</span><span class="en">Ongoing</span></b> · <svg style="width:20px;height:20px;vertical-align:-5px;margin-right:4px" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#C2410C"/><path d="M13 8h14M13 32h14" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M14 9c0 7 12 7 12 11S14 25 14 31h12c0-6-12-7-12-11s12-4 12-11" fill="#FFE2CF"/></svg><span class="fr">Surveiller l'expiration : l'entrepôt est valable deux ans par déclaration. À l'échéance, tout ce qui reste doit être sorti et les droits payés. La date figure dans la colonne EXPIRY DATE.</span><span class="en">Watch the expiry: each declaration can stay in the warehouse for two years. At expiry, everything left must be withdrawn and the duty paid. The date is in the EXPIRY DATE column.</span></div>
+<div class="note"><b><span class="fr">À savoir</span><span class="en">Good to know</span></b> · <span class="fr">Le fichier CMS contient déjà le travail de Pratab (colonnes TO PAY, onglet TO PAY CARTONS) : il sert de corrigé. Pour une démo, il faut une copie sans ces colonnes.</span><span class="en">The CMS file already contains Pratab's work (TO PAY columns, TO PAY CARTONS tab): it is the answer key. A demo needs a copy without those columns.</span></div></div></div><div class="flowview" data-view="claude" hidden><div class="flow"><div class="pill start"><span class="fr">Départ</span><span class="en">Start</span></div>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="1" tabindex="0">
+  <div class="nhead"><span class="num">1</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#2F6FD6"/><path d="M7 13a2 2 0 0 1 2-2h7l3 3h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#FFD66B"/><path d="M14 22l4 4 8-8" fill="none" stroke="#2F6FD6" stroke-width="2.4" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span><span class="uses"><span class="use">Cowork</span><span class="use">Skill</span></span></div>
+  <h3><span class="fr">Préparer Claude (une seule fois)</span><span class="en">Set up Claude (once)</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">nouveau, à faire une fois</span><span class="en">new, done once</span></p><p class="desc"><span class="fr">Un dossier relié à Claude et le skill cms-pastel-reconciliation enregistré.</span><span class="en">A folder linked to Claude and the cms-pastel-reconciliation skill saved.</span></p><ol class="how"><li><span class="fr">Enregistrer le skill depuis <b>cms-pastel-reconciliation.zip</b>.</span><span class="en">Save the skill from <b>cms-pastel-reconciliation.zip</b>.</span></li><li><span class="fr">Relier la session à l'ordinateur et connecter le dossier du rapprochement.</span><span class="en">Link the session to the computer and connect the reconciliation folder.</span></li></ol>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="2" tabindex="0">
+  <div class="nhead"><span class="num">2</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#8A5A2B"/><path d="M6 17l14-8 14 8v15H6z" fill="#F3E3CC"/><rect x="13" y="20" width="14" height="12" fill="#8A5A2B"/><path d="M13 24h14M13 28h14" stroke="#F3E3CC" stroke-width="1.4"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#2F6FD6"/><path d="M7 13a2 2 0 0 1 2-2h7l3 3h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#FFD66B"/><path d="M14 22l4 4 8-8" fill="none" stroke="#2F6FD6" stroke-width="2.4" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Mettre les deux fichiers dans le dossier</span><span class="en">Put the two files in the folder</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">étapes 2 et 3</span><span class="en">steps 2 and 3</span></p><p class="desc"><span class="fr">Le fichier CMS (stock sous douane, en litres) et l'export Pastel de Sylvain (en bouteilles), dans le même dossier. Les deux fichiers doivent être fermés dans Excel.</span><span class="en">The CMS file (bonded stock, in litres) and Sylvain's Pastel export (in bottles), in the same folder. Both files must be closed in Excel.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="3" tabindex="0">
+  <div class="nhead"><span class="num">3</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg></span></div><span class="actor a-claude">Claude</span><span class="uses"><span class="use">Skill cms-pastel-reconciliation</span><span class="use"><span class="fr">Mémoire des noms</span><span class="en">Name memory</span></span></span></div>
+  <h3><span class="fr">Rapprocher en une phrase</span><span class="en">Reconcile in one sentence</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">étapes 4, 5 et 6 : chercher, additionner, calculer</span><span class="en">steps 4, 5 and 6: finding, adding up, working out</span></p><p class="desc"><span class="fr">Claude convertit les litres en bouteilles restantes, retrouve chaque produit dans Pastel malgré les noms différents (avec une couleur de confiance), additionne les lignes d'un même produit et calcule la différence CMS moins Pastel. Le nom Pastel est un lien qui ouvre la ligne dans le fichier Pastel.</span><span class="en">Claude converts litres into bottles left, finds each product in Pastel despite the different names (with a confidence colour), adds up the lines of the same product and works out the difference CMS minus Pastel. The Pastel name is a link that opens the row in the Pastel file.</span></p><ol class="how"><li><span class="fr"><b>Entrée :</b> le fichier CMS (en litres) et l'export Pastel (en bouteilles) dans le même dossier, fermés dans Excel. Test : <i>CMS 201026.xlsx</i> et <i>PASTEL INVENTORY 201026.xls</i> (dans le zip AI 3).</span><span class="en"><b>Input:</b> the CMS file (in litres) and the Pastel export (in bottles) in the same folder, closed in Excel. Test: <i>CMS 201026.xlsx</i> and <i>PASTEL INVENTORY 201026.xls</i> (in the AI 3 zip).</span></li><li><span class="fr"><b>Sortie :</b> le même fichier CMS avec quatre colonnes : produit Pastel (lien), bouteilles restantes, quantité Pastel, différence CMS moins Pastel.</span><span class="en"><b>Output:</b> the same CMS file with four columns: Pastel product (link), bottles left, Pastel quantity, difference CMS minus Pastel.</span></li></ol><div class="prompt"><div class="prompt-head"><span><span class="fr">Phrase pour lancer ce skill seul</span><span class="en">Sentence to run this skill alone</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><pre>Use the cms-pastel-reconciliation skill on the files in this folder.</pre></div><p class="result"><span class="fr">Testé : 423 lignes CMS contre 1 078 articles Pastel ; exemple SOURETTE 2020 : 420 bouteilles au CMS, 123 dans Pastel, différence 297.</span><span class="en">Tested: 423 CMS lines against 1,078 Pastel items; example SOURETTE 2020: 420 bottles in CMS, 123 in Pastel, difference 297.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node is-check" data-step="4" tabindex="0">
+  <div class="nhead"><span class="num">4</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#6B4FBB"/><circle cx="18" cy="18" r="8" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M24 24l7 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M14.5 18l2.5 2.5 4.5-5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span><span class="uses"><span class="use"><span class="fr">Vérification</span><span class="en">Review</span></span><span class="use"><span class="fr">Mémoire</span><span class="en">Memory</span></span></span></div>
+  <h3><span class="fr">Vérifier les correspondances en couleur</span><span class="en">Check the coloured matches</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">nouveau</span><span class="en">new</span></p><p class="desc"><span class="fr">Pratab regarde d'abord l'orange (faible ou introuvable), puis le jaune (moyen), et clique sur le nom Pastel pour vérifier. Quand un nom s'écrit autrement dans Pastel, il le dit à Claude : la correction va dans la mémoire du skill.</span><span class="en">Pratab looks at orange first (weak or no match), then yellow (medium), and clicks the Pastel name to check. When a name is written differently in Pastel, he tells Claude: the correction goes into the skill's memory.</span></p><div class="prompt"><div class="prompt-head"><span><span class="fr">Exemple de correction</span><span class="en">Example correction</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><pre>In Pastel, SOURETTE 2020 is written &quot;SOEURETTE ST EMILION RGE 2020&quot;. Use it every time.</pre></div>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node is-manual" data-step="5" tabindex="0">
+  <div class="nhead"><span class="num">5</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#8A5A2B"/><path d="M6 17l14-8 14 8v15H6z" fill="#F3E3CC"/><rect x="13" y="20" width="14" height="12" fill="#8A5A2B"/><path d="M13 24h14M13 28h14" stroke="#F3E3CC" stroke-width="1.4"/></svg></span></div><span class="actor a-main">Pratab</span><span class="uses"><span class="manual-tag"><span class="fr">Reste manuel</span><span class="en">Stays manual</span></span></span></div>
+  <h3><span class="fr">Choisir la déclaration d'où sortir</span><span class="en">Choose the declaration to withdraw from</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">étape 7, encore à la main</span><span class="en">step 7, still by hand</span></p><p class="desc"><span class="fr">Pas encore dans le skill. Lors du premier test, la règle « la plus ancienne déclaration d'abord » expliquait 60 produits sur 68 : c'est la prochaine étape possible.</span><span class="en">Not in the skill yet. In the first test, the rule &quot;oldest declaration first&quot; explained 60 of 68 products: it is the next possible step.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node is-manual" data-step="6" tabindex="0">
+  <div class="nhead"><span class="num">6</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#1D2B57"/><path d="M20 7l11 4v8c0 7-5 11.5-11 14-6-2.5-11-7-11-14v-8z" fill="#C9A227"/><text x="20" y="23.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#1D2B57">MRA</text></svg></span></div><span class="actor a-main">Pratab</span><span class="uses"><span class="manual-tag"><span class="fr">Reste manuel</span><span class="en">Stays manual</span></span></span></div>
+  <h3><span class="fr">Déclarer la sortie et payer les droits</span><span class="en">Declare the exit and pay the duties</span></h3><p class="replaces"><span class="fr">Remplace : </span><span class="en">Replaces: </span><span class="fr">inchangé</span><span class="en">unchanged</span></p><p class="desc"><span class="fr">Pratab déclare à la douane et paie les droits.</span><span class="en">Pratab declares to customs and pays the duties.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="pill end"><span class="fr">Stock rapproché, droits payés</span><span class="en">Stock reconciled, duty paid</span></div><div class="note"><b><span class="fr">Ce qui change</span><span class="en">What changes</span></b> · <span class="fr">Disparaissent : convertir 423 lignes de litres en bouteilles, chercher chaque produit dans 1 078 articles Pastel, additionner et soustraire. Restent à Pratab : vérifier les couleurs, choisir la déclaration, déclarer et payer.</span><span class="en">Gone: converting 423 lines from litres to bottles, searching each product among 1,078 Pastel items, adding up and subtracting. Still with Pratab: checking the colours, choosing the declaration, declaring and paying.</span></div><div class="note"><b><span class="fr">Pour plus tard</span><span class="en">For later</span></b> · <span class="fr">Choisir la déclaration la plus ancienne d'abord, mettre à jour le stock CMS après la sortie, surveiller les dates d'expiration.</span><span class="en">Choosing the oldest declaration first, updating the CMS stock after the exit, watching expiry dates.</span></div></div></div><div class="flowview" data-view="build" hidden><div class="flow"><div class="pill start"><span class="fr">Départ</span><span class="en">Start</span></div>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node is-manual" data-step="1" tabindex="0">
+  <div class="nhead"><span class="num">1</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#2F6FD6"/><path d="M7 13a2 2 0 0 1 2-2h7l3 3h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#FFD66B"/><path d="M14 22l4 4 8-8" fill="none" stroke="#2F6FD6" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span></div><span class="actor a-main">Pratab</span><span class="uses"><span class="manual-tag"><span class="fr">Reste manuel</span><span class="en">Stays manual</span></span></span></div>
+  <h3><span class="fr">Préparer le dossier et le projet</span><span class="en">Prepare the folder and the project</span></h3><p class="desc"><span class="fr">Un dossier avec les vraies pièces d'un dossier déjà traité, et un projet Cowork relié à ce dossier. On construit les skills sur un cas dont on connaît le résultat.</span><span class="en">A folder with the real documents of a file already done, and a Cowork project linked to it. The skills are built on a case whose result is known.</span></p><ol class="how"><li><span class="fr"><b>Où :</b> <i>Bureau\Oxenham\Création des skills\2 Stock sous douane</i>.</span><span class="en"><b>Where:</b> <i>Desktop\Oxenham\Création des skills\2 Stock sous douane</i>.</span></li><li><span class="fr">Cowork : <b>Projets → + → Utiliser un dossier existant</b>, nom du projet : <i>Création skills - Stock sous douane</i>.</span><span class="en">Cowork: <b>Projects → + → Use an existing folder</b>, project name: <i>Création skills - Stock sous douane</i>.</span></li><li><span class="fr">Deux fichiers seulement : <i>CMS 201026.xlsx</i> (douane, en litres) et <i>PASTEL INVENTORY 201026.xls</i> (Pastel, en bouteilles). Fermés dans Excel.</span><span class="en">Two files only: <i>CMS 201026.xlsx</i> (customs, in litres) and <i>PASTEL INVENTORY 201026.xls</i> (Pastel, in bottles). Closed in Excel.</span></li><li><span class="fr">Une <b>nouvelle tâche</b> par skill, dans ce projet.</span><span class="en">A <b>new task</b> for each skill, in this project.</span></li></ol>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="2" tabindex="0">
+  <div class="nhead"><span class="num">2</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#107C41"/><rect x="20" y="9" width="13" height="22" rx="2" fill="#33C481"/><path d="M22 15h9M22 20h9M22 25h9" stroke="#107C41" stroke-width="1.4"/><rect x="6" y="10" width="16" height="20" rx="3" fill="#0B5A2F"/><path d="M10 15l8 10M18 15l-8 10" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/></svg></span></div><span class="actor a-claude">Claude</span></div>
+  <h3><span class="fr">Convertir les litres en bouteilles</span><span class="en">Turn litres into bottles</span></h3><p class="desc"><span class="fr">Claude lit le format de chaque ligne du CMS (« 20 CT X 6 X 75 CL ») et calcule les bouteilles restantes, en formules.</span><span class="en">Claude reads each CMS line's pack format ("20 CT X 6 X 75 CL") and works out the bottles left, with formulas.</span></p><ol class="how"><li><span class="fr"><b>Document :</b> <i>CMS 201026.xlsx</i>.</span><span class="en"><b>Document:</b> <i>CMS 201026.xlsx</i>.</span></li><li><span class="fr"><b>Où :</b> nouvelle tâche dans le projet.</span><span class="en"><b>Where:</b> new task in the project.</span></li></ol><div class="prompt"><div class="prompt-head"><span><span class="fr">Prompt à copier</span><span class="en">Prompt to copy</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">Claude ajoute une colonne qui convertit les litres de la douane en bouteilles, avec des formules, à partir du format écrit dans la description.</span><span class="en">Claude adds a column that turns the customs litres into bottles, with formulas, from the pack format written in the description.</span></p><pre>Convert litres to bottles in the CMS file: cartons left = litres / (bottles per carton x litres per bottle),
+bottles left = cartons left x bottles per carton. The format is in column M or N, like &quot;20 CT X 6 X 75 CL&quot;;
+never use the carton count written in the text. Add a column with the total bottles left. Use only formulas, no hard coding.</pre></div><p class="result"><span class="fr">Une colonne de bouteilles restantes ; les lignes sans format (seaux à glace, capsules) restent vides.</span><span class="en">A bottles-left column; lines with no format (ice buckets, capsules) stay blank.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="3" tabindex="0">
+  <div class="nhead"><span class="num">3</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#00A651"/><rect x="9" y="9" width="22" height="22" rx="4" fill="#ffffff"/><text x="20" y="25.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#00A651">P</text></svg></span></div><span class="actor a-claude">Claude</span></div>
+  <h3><span class="fr">Rapprocher avec Pastel</span><span class="en">Reconcile with Pastel</span></h3><p class="desc"><span class="fr">Claude retrouve chaque produit du CMS dans Pastel malgré les noms différents, et calcule l'écart.</span><span class="en">Claude finds each CMS product in Pastel despite the different names, and works out the difference.</span></p><ol class="how"><li><span class="fr"><b>Document :</b> les deux fichiers.</span><span class="en"><b>Document:</b> both files.</span></li><li><span class="fr"><b>Où :</b> même tâche.</span><span class="en"><b>Where:</b> same task.</span></li></ol><div class="prompt"><div class="prompt-head"><span><span class="fr">Prompt à copier</span><span class="en">Prompt to copy</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">Claude cherche chaque produit du CMS dans Pastel malgré les noms différents, calcule l'écart et ajoute un lien vers Pastel pour vérifier.</span><span class="en">Claude finds each CMS product in Pastel despite the different names, works out the difference and adds a link to Pastel to check.</span></p><pre>Now reconcile Pastel and CMS: find each CMS product in Pastel by name and calculate the difference, CMS minus Pastel.
+Add a hyperlink so I can open the Pastel file on the matching product and check it.</pre></div><div class="prompt"><div class="prompt-head"><span><span class="fr">Correction (si Claude se trompe)</span><span class="en">Correction (if Claude gets it wrong)</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">Correction : trop de colonnes, et le lien doit ouvrir le vrai fichier Pastel, pas une copie.</span><span class="en">Correction: too many columns, and the link must open the real Pastel file, not a copy.</span></p><pre>Way too many columns. Do not add a Pastel sheet to this file: the link must open the original Pastel file on the right row.</pre></div><div class="prompt"><div class="prompt-head"><span><span class="fr">Correction (si Claude se trompe)</span><span class="en">Correction (if Claude gets it wrong)</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">Correction : la présentation que Pratab veut : les deux noms côte à côte, les colonnes inutiles supprimées, A à F figées.</span><span class="en">Correction: the layout Pratab wants: both names side by side, useless columns removed, A to F frozen.</span></p><pre>Put the CMS product name and the Pastel product name next to each other, with the link on the Pastel product name.
+Delete columns O and P (Description 4 and 5). Freeze columns A to F.</pre></div><p class="result"><span class="fr">Correspondance avec une couleur de confiance : sans couleur = sûr, jaune = à vérifier, orange = faible.</span><span class="en">A match with a confidence colour: none = sure, yellow = to check, orange = weak.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="4" tabindex="0">
+  <div class="nhead"><span class="num">4</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#6B4FBB"/><circle cx="18" cy="18" r="8" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M24 24l7 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M14.5 18l2.5 2.5 4.5-5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg></span></div><span class="actor a-main">Pratab</span></div>
+  <h3><span class="fr">Corriger un nom</span><span class="en">Correct a name</span></h3><p class="desc"><span class="fr">Pratab dit comment un nom est écrit dans Pastel. Claude corrige toutes les lignes concernées : c'est le début de la mémoire du skill.</span><span class="en">Pratab says how a name is written in Pastel. Claude fixes every matching line: this starts the skill's memory.</span></p><ol class="how"><li><span class="fr"><b>Document :</b> aucun.</span><span class="en"><b>Document:</b> none.</span></li><li><span class="fr"><b>Où :</b> même tâche.</span><span class="en"><b>Where:</b> same task.</span></li></ol><div class="prompt"><div class="prompt-head"><span><span class="fr">Prompt à copier</span><span class="en">Prompt to copy</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">Pratab corrige un nom écrit différemment dans Pastel. Claude l'applique partout, et ce sera la première ligne de la mémoire du skill.</span><span class="en">Pratab corrects a name written differently in Pastel. Claude applies it everywhere, and it becomes the first line of the skill's memory.</span></p><pre>One name is written differently in Pastel: SOURETTE 2020 is &quot;SOEURETTE ST EMILION RGE 2020&quot;. Use it every time.</pre></div><p class="result"><span class="fr">SOURETTE 2020 : 420 bouteilles au CMS contre 123 dans Pastel, écart 297.</span><span class="en">SOURETTE 2020: 420 bottles in CMS against 123 in Pastel, difference 297.</span></p>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<article class="node" data-step="5" tabindex="0">
+  <div class="nhead"><span class="num">5</span><div class="icons"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#D97757"/><path d="M20 7l2.6 8.4L31 18l-8.4 2.6L20 29l-2.6-8.4L9 18l8.4-2.6z" fill="#ffffff"/><circle cx="29.5" cy="29.5" r="2.4" fill="#ffffff"/></svg></span><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="8" fill="#6B4FBB"/><circle cx="18" cy="18" r="8" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M24 24l7 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/><path d="M14.5 18l2.5 2.5 4.5-5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg></span></div><span class="actor a-claude">Claude</span><span class="uses"><span class="use">Skill cms-pastel-reconciliation</span><span class="manual-tag"><span class="fr">Ici, on crée le skill</span><span class="en">Create the skill here</span></span></span></div>
+  <h3><span class="fr">Créer le skill cms-pastel-reconciliation</span><span class="en">Create the skill cms-pastel-reconciliation</span></h3><p class="desc"><span class="fr">Le skill garde la méthode et une mémoire des noms corrigés. Claude affiche une carte de skill : on la lit, puis <b>Save</b>.</span><span class="en">The skill keeps the method and a memory of corrected names. Claude shows a skill card: read it, then <b>Save</b>.</span></p><ol class="how"><li><span class="fr"><b>Où :</b> dans la même tâche, à la fin.</span><span class="en"><b>Where:</b> in the same task, at the end.</span></li><li><span class="fr">Le skill se retrouve dans <b>Paramètres → Capacités → Skills</b>.</span><span class="en">The skill then appears in <b>Settings → Capabilities → Skills</b>.</span></li></ol><div class="prompt"><div class="prompt-head"><span><span class="fr">Créer le skill</span><span class="en">Create the skill</span></span><button type="button" class="copy"><span class="fr">Copier</span><span class="en">Copy</span></button></div><p class="pwhy"><span class="fr">On transforme toute la méthode en skill, avec une mémoire des noms corrigés.</span><span class="en">We turn the whole method into a skill, with a memory of corrected names.</span></p><pre>Create a skill called cms-pastel-reconciliation that rebuilds this CMS file from the two files, exactly as we just did:
+bottles left with formulas, matching with Pastel and a confidence colour, link to the Pastel row, CMS minus Pastel difference.
+Add a Memory section with the name corrections (start with SOURETTE 2020), and each time I give a new correction,
+propose an updated skill with the new line. Do not use the numbers of this month as rules.</pre></div>
+</article>
+<div class="arrow" aria-hidden="true"><span class="shaft"></span><svg viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+  
+  <footer><span class="fr">Sources : entretien avec Pratab (transcript « Douane ») et fichiers qu'il a partagés. Oxenham, octobre 2026.</span><span class="en">Sources: interview with Pratab (&quot;Douane&quot; transcript) and the files he shared. Oxenham, October 2026.</span></footer>
+</div>
+<script>
+(function () {
+  var body = document.body;
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function setLang(l) {
+    body.setAttribute("data-lang", l); document.documentElement.lang = l;
+    document.querySelectorAll("[data-lang-btn]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.langBtn === l)); });
+    set("pratab-lang", l);
+  }
+  document.querySelectorAll("[data-lang-btn]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.langBtn); }); });
+  setLang(get("pratab-lang") === "en" ? "en" : "fr");
+
+  var timer = null, i = 0;
+  function visibleNodes() {
+    var v = document.querySelector(".flowview:not([hidden])") || document;
+    return Array.prototype.slice.call(v.querySelectorAll(".flow .node"));
+  }
+  function clear() {
+    document.querySelectorAll(".flow .node.active").forEach(function (n) { n.classList.remove("active"); });
+    document.querySelectorAll(".flow .arrow.lit").forEach(function (a) { a.classList.remove("lit"); });
+  }
+  function arrowBefore(n) { var p = n.previousElementSibling; return p && p.classList.contains("arrow") ? p : null; }
+  function light(n) {
+    clear(); if (!n) return;
+    n.classList.add("active"); var a = arrowBefore(n); if (a) a.classList.add("lit");
+  }
+  function play() {
+    if (timer) clearInterval(timer);
+    var list = visibleNodes(); i = 0; light(list[0]);
+    timer = setInterval(function () {
+      i++; if (i >= list.length) { clearInterval(timer); timer = null; setTimeout(function () { if (!timer) clear(); }, 1600); return; }
+      light(list[i]);
+    }, 1700);
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } clear(); }
+  document.querySelectorAll(".flow .node").forEach(function (n) {
+    n.addEventListener("mouseenter", function () { if (!timer) light(n); });
+    n.addEventListener("focus", function () { if (!timer) light(n); });
+    n.addEventListener("mouseleave", function () { if (!timer) clear(); });
+  });
+
+  // "Today / With Claude" switch, only when the page has a Claude view
+  var hasClaudeView = !!document.querySelector('[data-view="claude"]');
+  function setMode(m, replay) {
+    var on = m !== "today";
+    body.classList.toggle("mode-claude", on);
+    document.querySelectorAll("[data-view]").forEach(function (v) { v.hidden = v.dataset.view !== m; });
+    document.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.mode === m)); });
+    try { history.replaceState(null, "", on ? "#" + m : location.pathname + location.search); } catch (e) {}
+    if (replay) { stop(); window.scrollTo({ top: 0, behavior: "smooth" }); setTimeout(play, 300); }
+  }
+  if (hasClaudeView) {
+    document.querySelectorAll("[data-mode]").forEach(function (b) {
+      b.addEventListener("click", function () { if (b.getAttribute("aria-pressed") !== "true") setMode(b.dataset.mode, true); });
+    });
+    var start = location.hash.slice(1);
+    setMode(document.querySelector('[data-mode="' + start + '"]') ? start : "today", false);
+  }
+
+  document.querySelectorAll(".qbtn").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var box = b.closest(".node").querySelector(".qbox");
+      var open = b.getAttribute("aria-expanded") !== "true";
+      b.setAttribute("aria-expanded", String(open)); box.hidden = !open;
+    });
+  });
+
+  document.querySelectorAll(".copy").forEach(function (b) {
+    var label = b.innerHTML;
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var pre = b.closest(".prompt").querySelector("pre");
+      function done() {
+        b.innerHTML = '<span class="fr">Copié</span><span class="en">Copied</span>';
+        setTimeout(function () { b.innerHTML = label; }, 1500);
+      }
+      function fallback() {
+        try {
+          var r = document.createRange(); r.selectNodeContents(pre);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          if (document.execCommand("copy")) done();
+        } catch (err) {}
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pre.innerText).then(done, fallback);
+      else fallback();
+    });
+  });
+  document.querySelectorAll("a[data-pop]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var w = Math.min(1100, screen.availWidth - 80), h = Math.min(820, screen.availHeight - 80);
+      var x = Math.round((screen.availWidth - w) / 2), y = Math.round((screen.availHeight - h) / 2);
+      var win = null;
+      try { win = window.open(a.dataset.pop, "wf-doc", "popup=yes,width=" + w + ",height=" + h + ",left=" + x + ",top=" + y); } catch (err) { win = null; }
+      if (win) { e.preventDefault(); try { win.focus(); } catch (err) {} }
+    });
+  });
+  if (location.protocol === "file:") {
+    document.querySelectorAll("a[data-local]").forEach(function (a) {
+      a.href = encodeURI(a.dataset.local); a.removeAttribute("target");
+    });
+    var files = {};
+    document.querySelectorAll('a[href*="claude.ai/artifact/"]').forEach(function (a) {
+      var id = a.getAttribute("href").split("/").pop();
+      if (files[id]) { a.href = encodeURI(files[id]); a.removeAttribute("target"); }
+    });
+  }
+  var bar = document.getElementById("bar");
+  function edge() { bar.classList.toggle("scrolled", window.scrollY > 4); }
+  window.addEventListener("scroll", edge, { passive: true }); edge();
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) setTimeout(play, 600);
+})();
+</script>
